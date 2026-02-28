@@ -23,11 +23,14 @@ Este es un repositorio donde daré forma a mi **portfolio personal** usando **HT
 ```
 Portfolio/
 ├── index.html           # Página de inicio
-├── css/
+├── style.scss/
 │   └── styles.css       # Estilos generales
-├── js/
-│   └── script.js        # Lógica de navegación y interactividad
-├── pages/               # Páginas de proyectos
+├── SCRIPTS/
+│   └── proyecto1.js        # Lógica de navegación y interactividad
+│   ├── proyecto2.js
+│   ├── proyecto3.js
+│   └── ...
+├── PROYECTOS/               # Páginas de proyectos
 │   ├── proyecto1.html
 │   ├── proyecto2.html
 │   └── ...
@@ -38,7 +41,7 @@ Portfolio/
 
 ## 💡 Ideas para las Páginas de Proyectos
 
-Cada página showcaseará una funcionalidad específica y buscará demostrar habilidades técnicas reales:
+Cada página mostrará una funcionalidad específica y buscará demostrar habilidades técnicas reales:
 
 ### 1. **App del Tiempo (Weather App)** 🌤️
 - Consume una API pública (OpenWeatherMap)

@@ -1,0 +1,548 @@
+// ============================================
+// VARIABLES
+// ============================================
+
+$colors: (
+        'bg-primary': #f8f5f0,      // Fondo principal cálido
+        'bg-card': #ffffff,          // Fondo tarjeta
+        'text-primary': #2c2c2c,     // Texto principal
+        'text-secondary': #5c5c5c,   // Texto secundario
+        'text-muted': #8c8c8c,       // Texto tenue
+        'accent': #b8a9a9,           // Acento gris rosado
+        'accent-light': #e8e0e0,     // Acento claro
+        'border': #eaeaea,           // Bordes
+        'shadow': rgba(0, 0, 0, 0.02),
+        'availability': #9ba8a0      // Verde grisáceo
+);
+
+$font-primary: 'Google Sans Code', -apple-system, BlinkMacSystemFont, sans-serif;
+$font-display: 'MonteCarlo', cursive;
+
+$spacing: (
+        'xs': 8px,
+        'sm': 16px,
+        'md': 24px,
+        'lg': 32px,
+        'xl': 48px,
+        '2xl': 64px
+);
+
+$radius: (
+        'sm': 12px,
+        'md': 16px,
+        'lg': 24px,
+        'full': 100px,
+        'circle': 50%
+);
+
+$shadow: 0 10px 40px rgba(0, 0, 0, 0.02);
+$shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.04);
+
+// ============================================
+// MIXINS
+// ============================================
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin transition {
+  transition: all 0.2s ease;
+}
+
+@mixin hover-lift {
+  @include transition;
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-hover;
+  }
+}
+
+// ============================================
+// RESET Y ESTILOS BASE
+// ============================================
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $font-primary;
+  background: map-get($colors, 'bg-primary');
+  color: map-get($colors, 'text-primary');
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: map-get($spacing, 'md');
+  line-height: 1.5;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (min-width: 768px) {
+    padding: map-get($spacing, 'xl');
+  }
+}
+
+// ============================================
+// CARD PRINCIPAL
+// ============================================
+
+.card {
+  max-width: 800px;
+  width: 100%;
+  background: map-get($colors, 'bg-card');
+  border-radius: map-get($radius, 'lg');
+  padding: map-get($spacing, 'xl');
+  box-shadow: $shadow;
+  border: 1px solid map-get($colors, 'border');
+  backdrop-filter: blur(10px);
+  animation: fadeIn 0.5s ease;
+
+  @media (min-width: 768px) {
+    padding: map-get($spacing, '2xl');
+  }
+}
+
+// ============================================
+// HEADER
+// ============================================
+
+.card-header {
+  @include flex-between;
+  margin-bottom: map-get($spacing, 'lg');
+  padding-bottom: map-get($spacing, 'lg');
+  border-bottom: 1px solid map-get($colors, 'border');
+}
+
+.profile-image {
+  width: 48px;
+  height: 48px;
+  border-radius: map-get($radius, 'circle');
+  object-fit: cover;
+  border: 2px solid map-get($colors, 'border');
+  @include transition;
+
+  &:hover {
+    transform: scale(1.05);
+    border-color: map-get($colors, 'accent');
+  }
+}
+
+.header-actions {
+  @include flex-center;
+  gap: map-get($spacing, 'md');
+}
+
+.availability-dot {
+  width: 8px;
+  height: 8px;
+  background: map-get($colors, 'availability');
+  border-radius: map-get($radius, 'circle');
+  position: relative;
+  cursor: default;
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: rgba(map-get($colors, 'availability'), 0.2);
+    border-radius: map-get($radius, 'circle');
+    top: -2px;
+    left: -2px;
+    animation: pulse 2s infinite;
+  }
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: map-get($colors, 'text-muted');
+  @include flex-center;
+  padding: map-get($spacing, 'xs');
+  @include transition;
+  border-radius: map-get($radius, 'circle');
+
+  &:hover {
+    color: map-get($colors, 'text-secondary');
+    background: map-get($colors, 'bg-primary');
+  }
+
+  span {
+    font-size: 20px;
+  }
+}
+
+// ============================================
+// TIPOGRAFÍA
+// ============================================
+
+h1 {
+  font-family: $font-display;
+  font-size: 2.2rem;
+  font-weight: 400;
+  text-align: center;
+  color: map-get($colors, 'text-primary');
+  margin-bottom: map-get($spacing, 'xs');
+  line-height: 1.2;
+
+  @media (min-width: 768px) {
+    font-size: 3rem;
+  }
+}
+
+h2 {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 400;
+  color: map-get($colors, 'text-muted');
+  margin-bottom: map-get($spacing, 'xl');
+  letter-spacing: 0.5px;
+}
+
+h3 {
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: map-get($colors, 'text-secondary');
+  margin-bottom: map-get($spacing, 'lg');
+  display: flex;
+  align-items: center;
+  gap: map-get($spacing, 'xs');
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  span {
+    font-size: 18px;
+    color: map-get($colors, 'accent');
+  }
+}
+
+h4 {
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: map-get($colors, 'text-primary');
+  margin-bottom: map-get($spacing, 'xs');
+  display: flex;
+  align-items: center;
+  gap: map-get($spacing, 'xs');
+
+  span {
+    font-size: 18px;
+    color: map-get($colors, 'accent');
+  }
+}
+
+// ============================================
+// ABOUT SECTION
+// ============================================
+
+.about {
+  margin-bottom: map-get($spacing, 'xl');
+}
+
+.bio {
+  color: map-get($colors, 'text-secondary');
+  margin-bottom: map-get($spacing, 'lg');
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.aspirations {
+  background: map-get($colors, 'bg-primary');
+  padding: map-get($spacing, 'lg');
+  border-radius: map-get($radius, 'md');
+  border: 1px solid map-get($colors, 'border');
+
+  p {
+    color: map-get($colors, 'text-muted');
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-left: 26px; // Alinear con el texto después del icono
+  }
+}
+
+// ============================================
+// TECH STACK
+// ============================================
+
+.tech-stack {
+  display: flex;
+  gap: map-get($spacing, 'sm');
+  justify-content: center;
+  margin: map-get($spacing, 'xl') 0;
+  flex-wrap: wrap;
+}
+
+.tech-item {
+  font-size: 0.8rem;
+  padding: map-get($spacing, 'xs') map-get($spacing, 'sm');
+  background: map-get($colors, 'bg-primary');
+  border-radius: map-get($radius, 'full');
+  color: map-get($colors, 'text-muted');
+  border: 1px solid map-get($colors, 'border');
+  @include transition;
+  cursor: default;
+
+  &:hover {
+    background: map-get($colors, 'bg-card');
+    color: map-get($colors, 'text-secondary');
+    border-color: map-get($colors, 'accent');
+  }
+}
+
+// ============================================
+// PROYECTOS
+// ============================================
+
+.projects {
+  margin-bottom: map-get($spacing, 'xl');
+  position: relative;
+}
+
+.projects-container {
+  display: flex;
+  align-items: center;
+  gap: map-get($spacing, 'sm');
+  position: relative;
+}
+
+.nav-arrow {
+  width: 36px;
+  height: 36px;
+  border-radius: map-get($radius, 'circle');
+  border: 1px solid map-get($colors, 'border');
+  background: map-get($colors, 'bg-card');
+  color: map-get($colors, 'text-muted');
+  @include flex-center;
+  cursor: pointer;
+  @include transition;
+  flex-shrink: 0;
+
+  &:hover:not(:disabled) {
+    background: map-get($colors, 'border');
+    color: map-get($colors, 'text-secondary');
+    transform: scale(1.1);
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  span {
+    font-size: 20px;
+  }
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: map-get($spacing, 'md');
+  flex: 1;
+  transition: transform 0.3s ease;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.project-card {
+  background: map-get($colors, 'bg-card');
+  border-radius: map-get($radius, 'md');
+  padding: map-get($spacing, 'lg');
+  border: 1px solid map-get($colors, 'border');
+  @include transition;
+  @include hover-lift;
+
+  &:hover {
+    border-color: map-get($colors, 'accent-light');
+  }
+}
+
+.project-image {
+  width: 100%;
+  height: 120px;
+  background: linear-gradient(
+                  135deg,
+                  map-get($colors, 'bg-primary') 0%,
+                  map-get($colors, 'accent-light') 100%
+  );
+  border-radius: map-get($radius, 'sm');
+  margin-bottom: map-get($spacing, 'md');
+  border: 1px solid map-get($colors, 'border');
+  @include transition;
+
+  .project-card:hover & {
+    opacity: 0.8;
+  }
+}
+
+.project-tags {
+  display: flex;
+  gap: map-get($spacing, 'xs');
+  margin: map-get($spacing, 'sm') 0;
+  flex-wrap: wrap;
+
+  span {
+    font-size: 0.7rem;
+    padding: 4px 8px;
+    background: map-get($colors, 'bg-primary');
+    border-radius: map-get($radius, 'full');
+    color: map-get($colors, 'text-muted');
+    border: 1px solid map-get($colors, 'border');
+  }
+}
+
+.project-card a {
+  display: inline-block;
+  font-size: 0.85rem;
+  color: map-get($colors, 'text-secondary');
+  text-decoration: none;
+  @include transition;
+  margin-top: map-get($spacing, 'xs');
+
+  &:hover {
+    color: map-get($colors, 'text-primary');
+    transform: translateX(4px);
+  }
+}
+
+// ============================================
+// ACTIVIDAD RECIENTE
+// ============================================
+
+.activity {
+  margin-bottom: map-get($spacing, 'xl');
+}
+
+.activity-list {
+  list-style: none;
+  background: map-get($colors, 'bg-primary');
+  border-radius: map-get($radius, 'md');
+  padding: map-get($spacing, 'md');
+  border: 1px solid map-get($colors, 'border');
+
+  li {
+    display: flex;
+    gap: map-get($spacing, 'md');
+    padding: map-get($spacing, 'sm') 0;
+    align-items: flex-start;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid map-get($colors, 'border');
+    }
+
+    span:first-child {
+      font-size: 18px;
+      color: map-get($colors, 'accent');
+      flex-shrink: 0;
+    }
+
+    div {
+      flex: 1;
+
+      strong {
+        display: block;
+        font-size: 0.9rem;
+        font-weight: 400;
+        color: map-get($colors, 'text-primary');
+        margin-bottom: 2px;
+      }
+
+      span {
+        font-size: 0.8rem;
+        color: map-get($colors, 'text-muted');
+      }
+    }
+  }
+}
+
+// ============================================
+// CONTACTO
+// ============================================
+
+.contact {
+  text-align: center;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: map-get($spacing, 'xl');
+  margin-top: map-get($spacing, 'lg');
+  padding-top: map-get($spacing, 'lg');
+  border-top: 1px solid map-get($colors, 'border');
+
+  a {
+    color: map-get($colors, 'text-muted');
+    text-decoration: none;
+    @include transition;
+    @include flex-center;
+    width: 40px;
+    height: 40px;
+    border-radius: map-get($radius, 'circle');
+    background: map-get($colors, 'bg-primary');
+    border: 1px solid map-get($colors, 'border');
+
+    &:hover {
+      background: map-get($colors, 'border');
+      color: map-get($colors, 'text-secondary');
+      transform: translateY(-2px);
+    }
+
+    span {
+      font-size: 20px;
+    }
+  }
+}
+
+// ============================================
+// ANIMACIONES
+// ============================================
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ============================================
+// UTILITIES
+// ============================================
+
+.material-symbols-outlined {
+  font-variation-settings:
+          'FILL' 0,
+          'wght' 300,
+          'GRAD' 0,
+          'opsz' 20;
+}
