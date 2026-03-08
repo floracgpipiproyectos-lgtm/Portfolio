@@ -1,0 +1,538 @@
+<!DOCTYPE="es">
+<head html>
+<html lang>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Memoria | Florencia Caminos</title>
+    <meta name="description" content="Juego de memoria con cartas">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-primary: #f8f5f0;
+            --bg-card: #ffffff;
+            --text-primary: #2c2c2c;
+            --text-secondary: #5c5c5c;
+            --accent: #667eea;
+            --accent-light: #e8e5ff;
+            --border: #eaeaea;
+            --success: #4caf50;
+            --warning: #ffa726;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Google Sans Code', sans-serif;
+            background: var(--bg-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .game-card {
+            background: var(--bg-card);
+            border-radius: 24px;
+            padding: 32px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .game-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .game-title {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .game-stats {
+            display: flex;
+            gap: 20px;
+        }
+
+        .stat {
+            background: var(--accent-light);
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .stat-value {
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .card {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, var(--accent) 0%, #764ba2 100%);
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card.flipped {
+            transform: rotateY(180deg);
+            background: white;
+            border: 2px solid var(--accent);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .card.matched {
+            transform: rotateY(180deg);
+            background: var(--success);
+            border-color: var(--success);
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .card.matched:hover {
+            transform: scale(1.05) rotateY(180deg);
+        }
+
+        .card-front,
+        .card-back {
+            position: absolute;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+        }
+
+        .card-front {
+            background: linear-gradient(135deg, var(--accent) 0%, #764ba2 100%);
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .card-back {
+            background: white;
+            transform: rotateY(180deg);
+            font-size: 2.5rem;
+        }
+
+        .card:not(.flipped):not(.matched) .card-back {
+            display: none;
+        }
+
+        .game-controls {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-game {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 100px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-restart {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-restart:hover {
+            background: #5a6fd6;
+            transform: scale(1.05);
+        }
+
+        .btn-difficulty {
+            background: #f0f0f0;
+            color: var(--text-secondary);
+        }
+
+        .btn-difficulty.active {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-difficulty:hover:not(.active) {
+            background: #e0e0e0;
+        }
+
+        .victory-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .victory-modal.show {
+            display: flex;
+        }
+
+        .victory-content {
+            background: white;
+            border-radius: 24px;
+            padding: 48px;
+            text-align: center;
+            animation: bounceIn 0.5s ease;
+            max-width: 400px;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .victory-emoji {
+            font-size: 5rem;
+            margin-bottom: 16px;
+        }
+
+        .victory-title {
+            font-size: 1.8rem;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .victory-stats {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .back-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background: white;
+            border-radius: 100px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            transition: all 0.2s ease;
+            z-index: 50;
+        }
+
+        .back-link:hover {
+            transform: translateX(-4px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+        }
+
+        @media (max-width: 500px) {
+            .game-card {
+                padding: 20px;
+            }
+            
+            .game-board {
+                gap: 8px;
+            }
+            
+            .card {
+                font-size: 2rem;
+            }
+            
+            .card-back {
+                font-size: 2rem;
+            }
+            
+            .game-header {
+                justify-content: center;
+                text-align: center;
+            }
+            
+            .game-stats {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="../index.html" class="back-link">
+        <span>←</span> Volver al Portfolio
+    </a>
+
+    <div class="game-card">
+        <div class="game-header">
+            <h1 class="game-title">
+                <span>🧠</span> Juego de Memoria
+            </h1>
+            <div class="game-stats">
+                <div class="stat">
+                    Movimientos: <span class="stat-value" id="moves">0</span>
+                </div>
+                <div class="stat">
+                    Tiempo: <span class="stat-value" id="time">0:00</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-board" id="gameBoard">
+            <!-- Cards will be generated here -->
+        </div>
+
+        <div class="game-controls">
+            <button class="btn-game btn-difficulty active" onclick="setDifficulty('easy')">Fácil (8)</button>
+            <button class="btn-game btn-difficulty" onclick="setDifficulty('medium')">Medio (12)</button>
+            <button class="btn-game btn-difficulty" onclick="setDifficulty('hard')">Difícil (16)</button>
+            <button class="btn-game btn-restart" onclick="restartGame()">
+                <span>🔄</span> Reiniciar
+            </button>
+        </div>
+    </div>
+
+    <!-- Victory Modal -->
+    <div class="victory-modal" id="victoryModal">
+        <div class="victory-content">
+            <div class="victory-emoji">🎉</div>
+            <h2 class="victory-title">¡Felicidades!</h2>
+            <p class="victory-stats" id="victoryStats">
+                Completaste el juego en X movimientos
+            </p>
+            <button class="btn-game btn-restart" onclick="closeVictoryAndRestart()">
+                <span>🔄</span> Jugar de nuevo
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Card emojis
+        const emojis = ['🍕', '🚀', '🌟', '🎸', '🎨', '🏀', '🌺', '🎂', 
+                       '🦋', '🌈', '🍦', '🎪', '🚲', '🎯', '🌸', '🎭'];
+
+        // Game state
+        let cards = [];
+        let flippedCards = [];
+        let matchedPairs = 0;
+        let moves = 0;
+        let timer = null;
+        let seconds = 0;
+        let gameStarted = false;
+        let currentDifficulty = 'easy';
+
+        // Difficulty settings
+        const difficulties = {
+            easy: 8,
+            medium: 12,
+            hard: 16
+        };
+
+        // Shuffle array
+        function shuffle(array) {
+            const newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+        }
+
+        // Initialize game
+        function initGame() {
+            const numPairs = difficulties[currentDifficulty];
+            const selectedEmojis = emojis.slice(0, numPairs);
+            const cardEmojis = shuffle([...selectedEmojis, ...selectedEmojis]);
+            
+            // Set grid columns based on difficulty
+            const board = document.getElementById('gameBoard');
+            board.style.gridTemplateColumns = currentDifficulty === 'hard' ? 'repeat(4, 1fr)' : 
+                                               currentDifficulty === 'medium' ? 'repeat(4, 1fr)' : 'repeat(4, 1fr)';
+            
+            board.innerHTML = cardEmojis.map((emoji, index) => `
+                <div class="card" data-index="${index}" data-emoji="${emoji}" onclick="flipCard(this)">
+                    <div class="card-front">?</div>
+                    <div class="card-back">${emoji}</div>
+                </div>
+            `).join('');
+
+            cards = document.querySelectorAll('.card');
+            flippedCards = [];
+            matchedPairs = 0;
+            moves = 0;
+            seconds = 0;
+            gameStarted = false;
+            
+            clearInterval(timer);
+            document.getElementById('moves').textContent = '0';
+            document.getElementById('time').textContent = '0:00';
+        }
+
+        // Flip card
+        function flipCard(card) {
+            // Start timer on first flip
+            if (!gameStarted) {
+                gameStarted = true;
+                startTimer();
+            }
+
+            // Ignore if already flipped or matched or if 2 cards already flipped
+            if (card.classList.contains('flipped') || 
+                card.classList.contains('matched') || 
+                flippedCards.length >= 2) {
+                return;
+            }
+
+            card.classList.add('flipped');
+            flippedCards.push(card);
+
+            if (flippedCards.length === 2) {
+                moves++;
+                document.getElementById('moves').textContent = moves;
+                checkMatch();
+            }
+        }
+
+        // Check for match
+        function checkMatch() {
+            const [card1, card2] = flippedCards;
+            const isMatch = card1.dataset.emoji === card2.dataset.emoji;
+
+            if (isMatch) {
+                card1.classList.add('matched');
+                card2.classList.add('matched');
+                matchedPairs++;
+                flippedCards = [];
+
+                // Check for victory
+                const numPairs = difficulties[currentDifficulty];
+                if (matchedPairs === numPairs) {
+                    setTimeout(showVictory, 500);
+                }
+            } else {
+                // Not a match - flip back after delay
+                setTimeout(() => {
+                    card1.classList.remove('flipped');
+                    card2.classList.remove('flipped');
+                    flippedCards = [];
+                }, 1000);
+            }
+        }
+
+        // Start timer
+        function startTimer() {
+            timer = setInterval(() => {
+                seconds++;
+                const mins = Math.floor(seconds / 60);
+                const secs = seconds % 60;
+                document.getElementById('time').textContent = 
+                    `${mins}:${secs.toString().padStart(2, '0')}`;
+            }, 1000);
+        }
+
+        // Set difficulty
+        function setDifficulty(difficulty) {
+            currentDifficulty = difficulty;
+            
+            // Update button styles
+            document.querySelectorAll('.btn-difficulty').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            initGame();
+        }
+
+        // Restart game
+        function restartGame() {
+            initGame();
+        }
+
+        // Show victory modal
+        function showVictory() {
+            clearInterval(timer);
+            const modal = document.getElementById('victoryModal');
+            const stats = document.getElementById('victoryStats');
+            
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            const timeStr = `${mins}:${secs.toString().padStart(2, '0')}`;
+            
+            stats.textContent = `Completaste el juego en ${moves} movimientos y ${timeStr}`;
+            modal.classList.add('show');
+        }
+
+        // Close victory and restart
+        function closeVictoryAndRestart() {
+            document.getElementById('victoryModal').classList.remove('show');
+            initGame();
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('victoryModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeVictoryAndRestart();
+            }
+        });
+
+        // Initialize on load
+        initGame();
+    </script>
+</body>
+</html>
+
