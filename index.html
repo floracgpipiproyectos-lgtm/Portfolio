@@ -1,39 +1,48 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Florencia Antonella Caminos Garcia | Desarrolladora Web</title>
-    <meta name="description" content="Portfolio de Florencia Caminos, desarrolladora web especializada en frontend">
+    <meta name="description"
+        content="Portfolio de Florencia Caminos Garcia, desarrolladora web especializada en frontend">
     <meta name="author" content="Florencia Antonella Caminos Garcia">
+
+    <!-- Favicon -->
+    <link rel="icon" href="Imagenes/frase.jpg" type="image/jpeg">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=MonteCarlo&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=MonteCarlo&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <!-- Material Symbols Outlined -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24..48,100..700,0..1,-50..200" />
 
     <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
     <!-- Custom Styles -->
     <link rel="stylesheet" href="style.css">
 
     <!-- Script principal -->
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </head>
 
 <body>
-    <!-- Navigation with Bootstrap Navbar -->
+    <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
         <div class="container">
             <a class="navbar-brand fw-bold" href="#">
-                <span class="text-primary">Florencia</span> Caminos
+                <span class="text-primary">Florencia</span> Caminos Garcia
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-label="Abrir menú">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -51,234 +60,306 @@
                         <a class="nav-link" href="#contact">Contacto</a>
                     </li>
                 </ul>
+                <!-- Search Bar -->
+                <div class="portfolio-search ms-3">
+                    <div class="search-wrapper">
+                        <span class="material-symbols-outlined search-icon">search</span>
+                        <input type="text" class="portfolio-search-input" placeholder="Buscar..." id="portfolioSearch"
+                            aria-label="Buscar en el portfolio" />
+                        <div class="portfolio-search-results" id="portfolioSearchResults">
+                            <a href="#about" class="search-result-item">
+                                <span class="material-symbols-outlined">person</span>
+                                <span>Sobre Mí</span>
+                            </a>
+                            <a href="#projects" class="search-result-item">
+                                <span class="material-symbols-outlined">folder</span>
+                                <span>Proyectos</span>
+                            </a>
+                            <a href="#skills" class="search-result-item">
+                                <span class="material-symbols-outlined">code</span>
+                                <span>Habilidades</span>
+                            </a>
+                            <a href="#contact" class="search-result-item">
+                                <span class="material-symbols-outlined">mail</span>
+                                <span>Contacto</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
 
-    <!-- Main Card Container -->
-    <div class="container py-5 mt-5">
-        <div class="card shadow-lg border-0" style="border-radius: 24px;">
-            <div class="card-header d-flex justify-content-between align-items-center border-0 pb-0">
-                <div class="d-flex align-items-center gap-3">
-                    <img src="Imagenes/Foto_Profesional.png" alt="Florencia Caminos" class="rounded-circle" style="width: 48px; height: 48px; object-fit: cover; border: 2px solid #eaeaea;">
-                    <div>
-                        <div class="availability-dot d-inline-block me-2"></div>
-                        <span class="text-muted small">Disponible para trabajar</span>
+    <!-- Main Content - Full Screen -->
+    <main class="main-content">
+        <div class="container-fluid px-4 px-lg-5">
+            <div class="row justify-content-center min-vh-100 align-items-center">
+                <div class="col-12 col-lg-10 col-xl-8">
+                    <!-- Profile Card -->
+                    <div class="profile-card shadow-lg">
+                        <div class="card-header-custom">
+                            <div class="d-flex align-items-center justify-content-between w-100">
+                                <div class="d-flex align-items-center gap-3">
+                                    <img src="Imagenes/Foto_Profesional.png" alt="Florencia Caminos Garcia"
+                                        class="profile-img">
+                                    <div>
+                                        <div class="availability-indicator">
+                                            <span class="availability-dot"></span>
+                                            <span>Disponible para trabajar</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="theme-toggle" aria-label="Cambiar tema">
+                                    <span class="material-symbols-outlined icon-sm">dark_mode</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="card-body-custom">
+                            <!-- Header -->
+                            <div class="text-center mb-5">
+                                <h1 class="name-title">Florencia Antonella Caminos Garcia</h1>
+                                <p class="role-text">Desarrolladora Web</p>
+                            </div>
+
+                            <!-- About Section -->
+                            <section id="about" class="mb-5">
+                                <h2 class="section-title">
+                                    <span class="material-symbols-outlined icon-md">person</span>
+                                    Sobre Mí
+                                </h2>
+                                <p class="about-text">
+                                    Hola, soy Florencia, Me especializo en crear experiencias web interactivas y
+                                    accesibles.
+                                    Me apasiona el código limpio y el diseño intuitivo.
+                                </p>
+                                <div class="aspirations-box">
+                                    <h3 class="d-flex align-items-center gap-2 mb-2">
+                                        <span class="material-symbols-outlined icon-sm">rocket_launch</span>
+                                        Aspiraciones
+                                    </h3>
+                                    <p class="mb-0">Busco colaborar en proyectos innovadores que desafíen mis
+                                        habilidades y contribuyan al crecimiento de una empresa líder en tecnología.</p>
+                                </div>
+                            </section>
+
+                            <!-- Skills Section -->
+                            <section id="skills" class="mb-5">
+                                <h2 class="section-title">
+                                    <span class="material-symbols-outlined icon-md">code</span>
+                                    Habilidades
+                                </h2>
+                                <div class="skills-container">
+                                    <span class="skill-badge">C++</span>
+                                    <span class="skill-badge">HTML5</span>
+                                    <span class="skill-badge">CSS3</span>
+                                    <span class="skill-badge">JavaScript</span>
+                                    <span class="skill-badge">React</span>
+                                    <span class="skill-badge">Bootstrap</span>
+                                    <span class="skill-badge">Tailwind</span>
+                                    <span class="skill-badge">Sass/SCSS</span>
+                                    <span class="skill-badge">Node.js</span>
+                                </div>
+                            </section>
+
+                            <!-- Projects Section - Carousel -->
+                            <section id="projects" class="mb-5">
+                                <h2 class="section-title">
+                                    <span class="material-symbols-outlined icon-md">folder</span>
+                                    Proyectos
+                                </h2>
+
+                                <!-- Project Carousel -->
+                                <div class="project-carousel">
+                                    <button class="carousel-btn prev-btn" id="prevBtn" aria-label="Proyecto anterior">
+                                        <span class="material-symbols-outlined">chevron_left</span>
+                                    </button>
+
+                                    <div class="carousel-track-container">
+                                        <div class="carousel-track" id="projectsTrack">
+                                            <!-- Project 1 -->
+                                            <div class="project-slide">
+                                                <article class="project-card">
+                                                    <div class="project-image-container">
+                                                        <div class="project-image"></div>
+                                                    </div>
+                                                    <div class="project-info">
+                                                        <h4 class="project-title">App del Clima</h4>
+                                                        <p class="project-desc">Aplicación del clima con API externa</p>
+                                                        <div class="project-tags">
+                                                            <span class="tag">API</span>
+                                                            <span class="tag">JavaScript</span>
+                                                        </div>
+                                                        <a href="PROYECTOS/proyecto1.html" class="project-link">Ver
+                                                            Proyecto →</a>
+                                                    </div>
+                                                </article>
+                                            </div>
+
+                                            <!-- Project 2 -->
+                                            <div class="project-slide">
+                                                <article class="project-card">
+                                                    <div class="project-image-container">
+                                                        <div class="project-image"></div>
+                                                    </div>
+                                                    <div class="project-info">
+                                                        <h4 class="project-title">Calculadora</h4>
+                                                        <p class="project-desc">Calculadora interactiva con operaciones
+                                                            avanzadas</p>
+                                                        <div class="project-tags">
+                                                            <span class="tag">UI/UX</span>
+                                                            <span class="tag">JavaScript</span>
+                                                        </div>
+                                                        <a href="PROYECTOS/proyecto2.html" class="project-link">Ver
+                                                            Proyecto →</a>
+                                                    </div>
+                                                </article>
+                                            </div>
+
+                                            <!-- Project 3 -->
+                                            <div class="project-slide">
+                                                <article class="project-card">
+                                                    <div class="project-image-container">
+                                                        <div class="project-image"></div>
+                                                    </div>
+                                                    <div class="project-info">
+                                                        <h4 class="project-title">To-Do List</h4>
+                                                        <p class="project-desc">Lista de tareas con localStorage</p>
+                                                        <div class="project-tags">
+                                                            <span class="tag">React</span>
+                                                            <span class="tag">CRUD</span>
+                                                        </div>
+                                                        <a href="PROYECTOS/proyecto3.html" class="project-link">Ver
+                                                            Proyecto →</a>
+                                                    </div>
+                                                </article>
+                                            </div>
+
+                                            <!-- Project 4 -->
+                                            <div class="project-slide">
+                                                <article class="project-card">
+                                                    <div class="project-image-container">
+                                                        <div class="project-image"></div>
+                                                    </div>
+                                                    <div class="project-info">
+                                                        <h4 class="project-title">E-commerce</h4>
+                                                        <p class="project-desc">Tienda online con carrito de compras</p>
+                                                        <div class="project-tags">
+                                                            <span class="tag">JavaScript</span>
+                                                            <span class="tag">DOM</span>
+                                                        </div>
+                                                        <a href="PROYECTOS/proyecto4.html" class="project-link">Ver
+                                                            Proyecto →</a>
+                                                    </div>
+                                                </article>
+                                            </div>
+
+                                            <!-- Project 5 -->
+                                            <div class="project-slide">
+                                                <article class="project-card">
+                                                    <div class="project-image-container">
+                                                        <div class="project-image react-gradient"></div>
+                                                        <span class="react-badge">React</span>
+                                                    </div>
+                                                    <div class="project-info">
+                                                        <h4 class="project-title">React To-Do App</h4>
+                                                        <p class="project-desc">Aplicación completa con React 18</p>
+                                                        <div class="project-tags">
+                                                            <span class="tag react-tag">React</span>
+                                                            <span class="tag react-tag">Hooks</span>
+                                                        </div>
+                                                        <a href="REACT/todo-app/dist/index.html?from=portfolio"
+                                                            class="project-link">Ver Proyecto →</a>
+                                                    </div>
+                                                </article>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button class="carousel-btn next-btn" id="nextBtn" aria-label="Proyecto siguiente">
+                                        <span class="material-symbols-outlined">chevron_right</span>
+                                    </button>
+                                </div>
+
+                                <div class="carousel-indicators" id="carouselIndicators">
+                                    <span class="indicator active" data-index="0"></span>
+                                    <span class="indicator" data-index="1"></span>
+                                    <span class="indicator" data-index="2"></span>
+                                    <span class="indicator" data-index="3"></span>
+                                    <span class="indicator" data-index="4"></span>
+                                </div>
+                            </section>
+
+                            <!-- Activity Section -->
+                            <section class="mb-5">
+                                <h2 class="section-title">
+                                    <span class="material-symbols-outlined icon-md">history</span>
+                                    Actividad Reciente
+                                </h2>
+                                <ul class="activity-list">
+                                    <li class="activity-item">
+                                        <span class="material-symbols-outlined icon-sm">commit</span>
+                                        <div>
+                                            <strong>Commit en 'portfolio-web'</strong>
+                                            <span>Actualización del CSS - hace 2 horas</span>
+                                        </div>
+                                    </li>
+                                    <li class="activity-item">
+                                        <span class="material-symbols-outlined icon-sm">fork_right</span>
+                                        <div>
+                                            <strong>Fork 'react-components'</strong>
+                                            <span>Explorando librerías - ayer</span>
+                                        </div>
+                                    </li>
+                                    <li class="activity-item">
+                                        <span class="material-symbols-outlined icon-sm">star</span>
+                                        <div>
+                                            <strong>Repositorio destacado</strong>
+                                            <span>Añadido a favoritos - hace 3 días</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </section>
+
+                            <!-- Contact Section -->
+                            <section id="contact" class="text-center mb-4">
+                                <h2 class="section-title justify-content-center">
+                                    <span class="material-symbols-outlined icon-md">mail</span>
+                                    Contacto
+                                </h2>
+                                <div class="social-links">
+                                    <a href="mailto:florcaminosgarcia@gmail.com" class="social-btn" title="Email"
+                                        aria-label="Enviar email">
+                                        <span class="material-symbols-outlined">mail</span>
+                                    </a>
+                                    <a href="https://www.linkedin.com/in/florencia-caminos-garcia-23a851225"
+                                        target="_blank" rel="noopener noreferrer" class="social-btn" title="LinkedIn"
+                                        aria-label="Ver LinkedIn">
+                                        <span class="material-symbols-outlined">work</span>
+                                    </a>
+                                    <a href="https://github.com/floracgpipiproyectos-lgtm" target="_blank"
+                                        rel="noopener noreferrer" class="social-btn" title="GitHub"
+                                        aria-label="Ver GitHub">
+                                        <span class="material-symbols-outlined">code</span>
+                                    </a>
+                                </div>
+                            </section>
+                        </div>
                     </div>
                 </div>
-                <button class="theme-toggle btn btn-outline-secondary rounded-circle" title="Cambiar tema">
-                    <span class="material-symbols-outlined">dark_mode</span>
-                </button>
-            </div>
-
-            <div class="card-body">
-                <!-- Header Section -->
-                <div class="text-center mb-4">
-                    <h1 style="font-family: 'MonteCarlo', cursive; font-size: 3rem; color: #2c2c2c;">Florencia Antonella Caminos Garcia</h1>
-                    <h2 class="text-muted fw-normal">Desarrolladora Web</h2>
-                </div>
-
-                <!-- About Section -->
-                <section id="about" class="mb-5">
-                    <h3 class="text-uppercase text-muted mb-3">
-                        <span class="material-symbols-outlined text-accent">person</span>
-                        Sobre Mí
-                    </h3>
-                    <p class="text-secondary lh-lg">
-                        Hola, soy Florencia. Me especializo en crear experiencias web interactivas y accesibles. 
-                        Me apasiona el código limpio y el diseño intuitivo.
-                    </p>
-                    <div class="bg-light p-4 rounded-3 border">
-                        <h4 class="d-flex align-items-center gap-2 mb-2">
-                            <span class="material-symbols-outlined text-accent">rocket_launch</span>
-                            Aspiraciones
-                        </h4>
-                        <p class="text-muted mb-0">Busco colaborar en proyectos innovadores que desafíen mis habilidades y contribuyan al crecimiento de una empresa líder en tecnología.</p>
-                    </div>
-                </section>
-
-                <!-- Tech Stack Section -->
-                <section id="skills" class="mb-5">
-                    <h3 class="text-uppercase text-muted mb-3">
-                        <span class="material-symbols-outlined text-accent">code</span>
-                        Habilidades
-                    </h3>
-                    <div class="d-flex flex-wrap gap-2 justify-content-center">
-                        <span class="badge bg-light text-dark border px-3 py-2">HTML5</span>
-                        <span class="badge bg-light text-dark border px-3 py-2">CSS3</span>
-                        <span class="badge bg-light text-dark border px-3 py-2">JavaScript</span>
-                        <span class="badge bg-light text-dark border px-3 py-2">React</span>
-                        <span class="badge bg-light text-dark border px-3 py-2">Bootstrap</span>
-                        <span class="badge bg-light text-dark border px-3 py-2">Tailwind</span>
-                        <span class="badge bg-light text-dark border px-3 py-2">Sass/SCSS</span>
-                        <span class="badge bg-light text-dark border px-3 py-2">Node.js</span>
-                    </div>
-                </section>
-
-                <!-- Projects Section -->
-                <section id="projects" class="mb-5">
-                    <h3 class="text-uppercase text-muted mb-3">
-                        <span class="material-symbols-outlined text-accent">folder</span>
-                        Proyectos
-                    </h3>
-
-                    <!-- Navigation Arrows -->
-                    <div class="d-flex align-items-center justify-content-between mb-3">
-                        <button class="nav-arrow nav-arrow-left btn btn-outline-secondary rounded-circle" id="prevBtn">
-                            <span class="material-symbols-outlined">chevron_left</span>
-                        </button>
-                        <span class="text-muted small">Navega entre proyectos</span>
-                        <button class="nav-arrow nav-arrow-right btn btn-outline-secondary rounded-circle" id="nextBtn">
-                            <span class="material-symbols-outlined">chevron_right</span>
-                        </button>
-                    </div>
-
-                    <!-- Projects Grid -->
-                    <div class="row g-4" id="projectsGrid">
-                        <!-- Project 1 -->
-                        <div class="col-md-6 col-lg-4">
-                            <article class="project-card card h-100 border-0 shadow-sm">
-                                <div class="project-image rounded" style="height: 140px;"></div>
-                                <div class="card-body">
-                                    <h4 class="h5">App del Clima</h4>
-                                    <p class="text-muted small">Aplicación del clima con API externa</p>
-                                    <div class="d-flex flex-wrap gap-1 mb-2">
-                                        <span class="badge bg-primary-subtle text-primary">API</span>
-                                        <span class="badge bg-primary-subtle text-primary">JavaScript</span>
-                                    </div>
-                                    <a href="PROYECTOS/proyecto1.html" class="text-decoration-none small">Ver Proyecto →</a>
-                                </div>
-                            </article>
-                        </div>
-
-                        <!-- Project 2 -->
-                        <div class="col-md-6 col-lg-4">
-                            <article class="project-card card h-100 border-0 shadow-sm">
-                                <div class="project-image rounded" style="height: 140px;"></div>
-                                <div class="card-body">
-                                    <h4 class="h5">Calculadora</h4>
-                                    <p class="text-muted small">Calculadora interactiva con operaciones avanzadas</p>
-                                    <div class="d-flex flex-wrap gap-1 mb-2">
-                                        <span class="badge bg-primary-subtle text-primary">UI/UX</span>
-                                        <span class="badge bg-primary-subtle text-primary">JavaScript</span>
-                                    </div>
-                                    <a href="PROYECTOS/proyecto2.html" class="text-decoration-none small">Ver Proyecto →</a>
-                                </div>
-                            </article>
-                        </div>
-
-                        <!-- Project 3 -->
-                        <div class="col-md-6 col-lg-4">
-                            <article class="project-card card h-100 border-0 shadow-sm">
-                                <div class="project-image rounded" style="height: 140px;"></div>
-                                <div class="card-body">
-                                    <h4 class="h5">To-Do List</h4>
-                                    <p class="text-muted small">Lista de tareas con localStorage</p>
-                                    <div class="d-flex flex-wrap gap-1 mb-2">
-                                        <span class="badge bg-primary-subtle text-primary">React</span>
-                                        <span class="badge bg-primary-subtle text-primary">CRUD</span>
-                                    </div>
-                                    <a href="PROYECTOS/proyecto3.html" class="text-decoration-none small">Ver Proyecto →</a>
-                                </div>
-                            </article>
-                        </div>
-
-                        <!-- Project 4 -->
-                        <div class="col-md-6 col-lg-4">
-                            <article class="project-card card h-100 border-0 shadow-sm">
-                                <div class="project-image rounded" style="height: 140px;"></div>
-                                <div class="card-body">
-                                    <h4 class="h5">E-commerce</h4>
-                                    <p class="text-muted small">Tienda online con carrito de compras</p>
-                                    <div class="d-flex flex-wrap gap-1 mb-2">
-                                        <span class="badge bg-primary-subtle text-primary">JavaScript</span>
-                                        <span class="badge bg-primary-subtle text-primary">DOM</span>
-                                    </div>
-                                    <a href="PROYECTOS/proyecto4.html" class="text-decoration-none small">Ver Proyecto →</a>
-                                </div>
-                            </article>
-                        </div>
-
-                        <!-- Project 5 - React App -->
-                        <div class="col-md-6 col-lg-4">
-                            <article class="project-card card h-100 border-0 shadow-sm">
-                                <div class="project-image rounded position-relative" style="height: 140px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                                    <span class="position-absolute top-0 end-0 badge bg-warning m-2">React</span>
-                                </div>
-                                <div class="card-body">
-                                    <h4 class="h5">React To-Do App</h4>
-                                    <p class="text-muted small">Aplicación completa con React 18</p>
-                                    <div class="d-flex flex-wrap gap-1 mb-2">
-                                        <span class="badge bg-info text-dark">React</span>
-                                        <span class="badge bg-info text-dark">Hooks</span>
-                                    </div>
-                                    <a href="REACT/todo-app/public/index.html" class="text-decoration-none small">Ver Proyecto →</a>
-                                </div>
-                            </article>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Activity Section -->
-                <section class="mb-5">
-                    <h3 class="text-uppercase text-muted mb-3">
-                        <span class="material-symbols-outlined text-accent">history</span>
-                        Actividad Reciente
-                    </h3>
-                    <ul class="list-group list-group-flush bg-light rounded-3">
-                        <li class="list-group-item d-flex align-items-start gap-3 bg-transparent">
-                            <span class="material-symbols-outlined text-accent">commit</span>
-                            <div>
-                                <strong>Commit en 'portfolio-web'</strong>
-                                <br><small class="text-muted">Actualización del CSS - hace 2 horas</small>
-                            </div>
-                        </li>
-                        <li class="list-group-item d-flex align-items-start gap-3 bg-transparent">
-                            <span class="material-symbols-outlined text-accent">fork_right</span>
-                            <div>
-                                <strong>Fork 'react-components'</strong>
-                                <br><small class="text-muted">Explorando librerías - ayer</small>
-                            </div>
-                        </li>
-                        <li class="list-group-item d-flex align-items-start gap-3 bg-transparent">
-                            <span class="material-symbols-outlined text-accent">star</span>
-                            <div>
-                                <strong>Repositorio destacado</strong>
-                                <br><small class="text-muted">Añadido a favoritos - hace 3 días</small>
-                            </div>
-                        </li>
-                    </ul>
-                </section>
-
-                <!-- Contact Section -->
-                <section id="contact" class="text-center">
-                    <h3 class="text-uppercase text-muted mb-3">
-                        <span class="material-symbols-outlined text-accent">mail</span>
-                        Contacto
-                    </h3>
-                    <div class="d-flex justify-content-center gap-4">
-                        <a href="mailto:florcaminosgarcia@gmail.com" class="btn btn-outline-secondary rounded-circle p-3" title="Email">
-                            <span class="material-symbols-outlined">mail</span>
-                        </a>
-                        <a href="https://www.linkedin.com/in/florencia-caminos-garcia-23a851225" target="_blank" class="btn btn-outline-secondary rounded-circle p-3" title="LinkedIn">
-                            <span class="material-symbols-outlined">work</span>
-                        </a>
-                        <a href="https://github.com/floracgpipiproyectos-lgtm" target="_blank" class="btn btn-outline-secondary rounded-circle p-3" title="GitHub">
-                            <span class="material-symbols-outlined">code</span>
-                        </a>
-                    </div>
-                </section>
             </div>
         </div>
-    </div>
+    </main>
 
     <!-- Footer -->
-    <footer class="text-center py-4 text-muted">
+    <footer class="footer">
         <small>© 2024 Florencia Antonella Caminos Garcia. Todos los derechos reservados.</small>
     </footer>
 
     <!-- Bootstrap 5 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
 </body>
-</html>
 
+</html>

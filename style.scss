@@ -1,69 +1,69 @@
 // ============================================
+// IMPORTS
+// ============================================
+@use "sass:map";
+
+// ============================================
 // VARIABLES
 // ============================================
 
 $colors: (
-        'bg-primary': #f8f5f0,      // Fondo principal cálido
-        'bg-card': #ffffff,          // Fondo tarjeta
-        'text-primary': #2c2c2c,     // Texto principal
-        'text-secondary': #5c5c5c,   // Texto secundario
-        'text-muted': #8c8c8c,       // Texto tenue
-        'accent': #b8a9a9,           // Acento gris rosado
-        'accent-light': #e8e0e0,     // Acento claro
-        'border': #eaeaea,           // Bordes
-        'shadow': rgba(0, 0, 0, 0.02),
-        'availability': #9ba8a0      // Verde grisáceo
+    'bg-primary': #f5f0eb,
+    'bg-secondary': #faf8f5,
+    'bg-card': #ffffff,
+    'text-primary': #2d2d2d,
+    'text-secondary': #5a5a5a,
+    'text-muted': #8a8a8a,
+    'accent': #c9a87c,
+    'accent-light': #e8dcc8,
+    'accent-dark': #a68b5b,
+    'border': #e8e4de,
+    'shadow': rgba(0, 0, 0, 0.08),
+    'shadow-hover': rgba(0, 0, 0, 0.12)
 );
 
-$font-primary: 'Google Sans Code', -apple-system, BlinkMacSystemFont, sans-serif;
+$font-primary: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
 $font-display: 'MonteCarlo', cursive;
 
 $spacing: (
-        'xs': 8px,
-        'sm': 16px,
-        'md': 24px,
-        'lg': 32px,
-        'xl': 48px,
-        '2xl': 64px
+    'xs': 8px,
+    'sm': 12px,
+    'md': 16px,
+    'lg': 24px,
+    'xl': 32px,
+    '2xl': 48px,
+    '3xl': 64px
 );
 
 $radius: (
-        'sm': 12px,
-        'md': 16px,
-        'lg': 24px,
-        'full': 100px,
-        'circle': 50%
+    'sm': 8px,
+    'md': 12px,
+    'lg': 16px,
+    'xl': 24px,
+    'full': 50%
 );
 
-$shadow: 0 10px 40px rgba(0, 0, 0, 0.02);
-$shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.04);
+$shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+$shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.12);
 
 // ============================================
 // MIXINS
 // ============================================
 
 @mixin flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 @mixin flex-between {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 @mixin transition {
-  transition: all 0.2s ease;
-}
-
-@mixin hover-lift {
-  @include transition;
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: $shadow-hover;
-  }
+    transition: all 0.3s ease;
 }
 
 // ============================================
@@ -71,478 +71,822 @@ $shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.04);
 // ============================================
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-  font-family: $font-primary;
-  background: map-get($colors, 'bg-primary');
-  color: map-get($colors, 'text-primary');
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: map-get($spacing, 'md');
-  line-height: 1.5;
-  font-size: 14px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    font-family: $font-primary;
+    background: linear-gradient(135deg, #f5f0eb 0%, #e8e0d5 50%, #f0ebe3 100%);
+    color: map.get($colors, 'text-primary');
+    min-height: 100vh;
+    line-height: 1.6;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
 
-  @media (min-width: 768px) {
-    padding: map-get($spacing, 'xl');
-  }
+
+// ============================================
+// MAIN CONTENT - FULL SCREEN
+// ============================================
+
+.main-content {
+    min-height: 100vh;
+    padding-top: 80px;
+}
+
+.min-vh-100 {
+    min-height: 100vh;
 }
 
 // ============================================
-// CARD PRINCIPAL
+// NAVBAR
 // ============================================
 
-.card {
-  max-width: 800px;
-  width: 100%;
-  background: map-get($colors, 'bg-card');
-  border-radius: map-get($radius, 'lg');
-  padding: map-get($spacing, 'xl');
-  box-shadow: $shadow;
-  border: 1px solid map-get($colors, 'border');
-  backdrop-filter: blur(10px);
-  animation: fadeIn 0.5s ease;
-
-  @media (min-width: 768px) {
-    padding: map-get($spacing, '2xl');
-  }
+.navbar {
+    background: rgba(255, 255, 255, 0.95);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    padding: map.get($spacing, 'md') 0;
+    
+    .navbar-brand {
+        font-family: $font-display;
+        font-size: 1.5rem;
+        color: map.get($colors, 'accent-dark');
+        
+        .text-primary {
+            color: map.get($colors, 'accent-dark') !important;
+        }
+    }
+    
+    .nav-link {
+        color: map.get($colors, 'text-secondary');
+        font-weight: 500;
+        padding: map.get($spacing, 'sm') map.get($spacing, 'md') !important;
+        @include transition;
+        
+        &:hover {
+            color: map.get($colors, 'accent-dark');
+        }
+    }
+    
+    .navbar-toggler {
+        border: none;
+        padding: map.get($spacing, 'sm');
+        
+        &:focus {
+            box-shadow: none;
+        }
+    }
 }
 
 // ============================================
-// HEADER
+// PROFILE CARD
 // ============================================
 
-.card-header {
-  @include flex-between;
-  margin-bottom: map-get($spacing, 'lg');
-  padding-bottom: map-get($spacing, 'lg');
-  border-bottom: 1px solid map-get($colors, 'border');
+.profile-card {
+    background: map.get($colors, 'bg-card');
+    border-radius: map.get($radius, 'xl');
+    box-shadow: $shadow;
+    overflow: hidden;
+    border: 1px solid map.get($colors, 'border');
 }
 
-.profile-image {
-  width: 48px;
-  height: 48px;
-  border-radius: map-get($radius, 'circle');
-  object-fit: cover;
-  border: 2px solid map-get($colors, 'border');
-  @include transition;
-
-  &:hover {
-    transform: scale(1.05);
-    border-color: map-get($colors, 'accent');
-  }
+.card-header-custom {
+    background: linear-gradient(135deg, #faf8f5 0%, #f5f0eb 100%);
+    padding: map.get($spacing, 'lg') map.get($spacing, 'xl');
+    border-bottom: 1px solid map.get($colors, 'border');
 }
 
-.header-actions {
-  @include flex-center;
-  gap: map-get($spacing, 'md');
+.profile-img {
+    width: 56px;
+    height: 56px;
+    border-radius: map.get($radius, 'full');
+    object-fit: cover;
+    border: 3px solid map.get($colors, 'accent');
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.availability-indicator {
+    display: flex;
+    align-items: center;
+    gap: map.get($spacing, 'sm');
+    font-size: 0.85rem;
+    color: map.get($colors, 'text-muted');
 }
 
 .availability-dot {
-  width: 8px;
-  height: 8px;
-  background: map-get($colors, 'availability');
-  border-radius: map-get($radius, 'circle');
-  position: relative;
-  cursor: default;
-
-  &::after {
-    content: '';
-    position: absolute;
-    width: 12px;
-    height: 12px;
-    background: rgba(map-get($colors, 'availability'), 0.2);
-    border-radius: map-get($radius, 'circle');
-    top: -2px;
-    left: -2px;
-    animation: pulse 2s infinite;
-  }
+    width: 10px;
+    height: 10px;
+    background: #7cb87c;
+    border-radius: map.get($radius, 'full');
+    position: relative;
+    
+    &::after {
+        content: '';
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: rgba(124, 184, 124, 0.2);
+        border-radius: map.get($radius, 'full');
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation: pulse 2s infinite;
+    }
 }
 
 .theme-toggle {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: map-get($colors, 'text-muted');
-  @include flex-center;
-  padding: map-get($spacing, 'xs');
-  @include transition;
-  border-radius: map-get($radius, 'circle');
+    width: 40px;
+    height: 40px;
+    border-radius: map.get($radius, 'full');
+    border: 1px solid map.get($colors, 'border');
+    background: map.get($colors, 'bg-card');
+    cursor: pointer;
+    @include flex-center;
+    @include transition;
+    
+    &:hover {
+        background: map.get($colors, 'accent-light');
+        border-color: map.get($colors, 'accent');
+    }
+}
 
-  &:hover {
-    color: map-get($colors, 'text-secondary');
-    background: map-get($colors, 'bg-primary');
-  }
-
-  span {
-    font-size: 20px;
-  }
+.card-body-custom {
+    padding: map.get($spacing, 'xl');
+    
+    @media (min-width: 992px) {
+        padding: map.get($spacing, '2xl');
+    }
 }
 
 // ============================================
-// TIPOGRAFÍA
+// TYPOGRAPHY
 // ============================================
 
-h1 {
-  font-family: $font-display;
-  font-size: 2.2rem;
-  font-weight: 400;
-  text-align: center;
-  color: map-get($colors, 'text-primary');
-  margin-bottom: map-get($spacing, 'xs');
-  line-height: 1.2;
-
-  @media (min-width: 768px) {
-    font-size: 3rem;
-  }
+.name-title {
+    font-family: $font-display;
+    font-size: 2.5rem;
+    color: map.get($colors, 'text-primary');
+    margin-bottom: map.get($spacing, 'sm');
+    letter-spacing: 0.5px;
+    
+    @media (min-width: 768px) {
+        font-size: 3.5rem;
+    }
 }
 
-h2 {
-  text-align: center;
-  font-size: 1rem;
-  font-weight: 400;
-  color: map-get($colors, 'text-muted');
-  margin-bottom: map-get($spacing, 'xl');
-  letter-spacing: 0.5px;
+.role-text {
+    font-size: 1.1rem;
+    color: map.get($colors, 'accent-dark');
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
-h3 {
-  font-size: 0.95rem;
-  font-weight: 400;
-  color: map-get($colors, 'text-secondary');
-  margin-bottom: map-get($spacing, 'lg');
-  display: flex;
-  align-items: center;
-  gap: map-get($spacing, 'xs');
-  text-transform: uppercase;
-  letter-spacing: 1px;
-
-  span {
-    font-size: 18px;
-    color: map-get($colors, 'accent');
-  }
-}
-
-h4 {
-  font-size: 0.95rem;
-  font-weight: 400;
-  color: map-get($colors, 'text-primary');
-  margin-bottom: map-get($spacing, 'xs');
-  display: flex;
-  align-items: center;
-  gap: map-get($spacing, 'xs');
-
-  span {
-    font-size: 18px;
-    color: map-get($colors, 'accent');
-  }
-}
-
-// ============================================
-// ABOUT SECTION
-// ============================================
-
-.about {
-  margin-bottom: map-get($spacing, 'xl');
-}
-
-.bio {
-  color: map-get($colors, 'text-secondary');
-  margin-bottom: map-get($spacing, 'lg');
-  font-size: 0.95rem;
-  line-height: 1.6;
-}
-
-.aspirations {
-  background: map-get($colors, 'bg-primary');
-  padding: map-get($spacing, 'lg');
-  border-radius: map-get($radius, 'md');
-  border: 1px solid map-get($colors, 'border');
-
-  p {
-    color: map-get($colors, 'text-muted');
+.section-title {
     font-size: 0.9rem;
-    line-height: 1.6;
-    margin-left: 26px; // Alinear con el texto después del icono
-  }
+    font-weight: 600;
+    color: map.get($colors, 'text-muted');
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: map.get($spacing, 'lg');
+    display: flex;
+    align-items: center;
+    gap: map.get($spacing, 'sm');
+}
+
+.about-text {
+    color: map.get($colors, 'text-secondary');
+    line-height: 1.8;
+    margin-bottom: map.get($spacing, 'lg');
+    font-size: 1rem;
+}
+
+.aspirations-box {
+    background: linear-gradient(135deg, #faf8f5 0%, #f5f0eb 100%);
+    padding: map.get($spacing, 'lg');
+    border-radius: map.get($radius, 'lg');
+    border: 1px solid map.get($colors, 'border');
+    
+    h3 {
+        font-size: 1rem;
+        font-weight: 600;
+        color: map.get($colors, 'text-primary');
+        margin-bottom: map.get($spacing, 'sm');
+    }
+    
+    p {
+        color: map.get($colors, 'text-muted');
+        font-size: 0.95rem;
+    }
 }
 
 // ============================================
-// TECH STACK
+// ICONS
 // ============================================
 
-.tech-stack {
-  display: flex;
-  gap: map-get($spacing, 'sm');
-  justify-content: center;
-  margin: map-get($spacing, 'xl') 0;
-  flex-wrap: wrap;
+.icon-sm {
+    font-size: 20px !important;
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
 
-.tech-item {
-  font-size: 0.8rem;
-  padding: map-get($spacing, 'xs') map-get($spacing, 'sm');
-  background: map-get($colors, 'bg-primary');
-  border-radius: map-get($radius, 'full');
-  color: map-get($colors, 'text-muted');
-  border: 1px solid map-get($colors, 'border');
-  @include transition;
-  cursor: default;
-
-  &:hover {
-    background: map-get($colors, 'bg-card');
-    color: map-get($colors, 'text-secondary');
-    border-color: map-get($colors, 'accent');
-  }
+.icon-md {
+    font-size: 24px !important;
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
 
 // ============================================
-// PROYECTOS
+// SKILLS
 // ============================================
 
-.projects {
-  margin-bottom: map-get($spacing, 'xl');
-  position: relative;
+.skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: map.get($spacing, 'sm');
+    justify-content: center;
 }
 
-.projects-container {
-  display: flex;
-  align-items: center;
-  gap: map-get($spacing, 'sm');
-  position: relative;
+.skill-badge {
+    padding: map.get($spacing, 'sm') map.get($spacing, 'md');
+    background: map.get($colors, 'bg-secondary');
+    border: 1px solid map.get($colors, 'border');
+    border-radius: map.get($radius, 'full');
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: map.get($colors, 'text-secondary');
+    @include transition;
+    cursor: default;
+    
+    &:hover {
+        background: map.get($colors, 'accent-light');
+        border-color: map.get($colors, 'accent');
+        color: map.get($colors, 'accent-dark');
+        transform: translateY(-2px);
+    }
 }
 
-.nav-arrow {
-  width: 36px;
-  height: 36px;
-  border-radius: map-get($radius, 'circle');
-  border: 1px solid map-get($colors, 'border');
-  background: map-get($colors, 'bg-card');
-  color: map-get($colors, 'text-muted');
-  @include flex-center;
-  cursor: pointer;
-  @include transition;
-  flex-shrink: 0;
+// ============================================
+// PROJECT CAROUSEL
+// ============================================
 
-  &:hover:not(:disabled) {
-    background: map-get($colors, 'border');
-    color: map-get($colors, 'text-secondary');
-    transform: scale(1.1);
-  }
-
-  &:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-  }
-
-  span {
-    font-size: 20px;
-  }
+.project-carousel {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: map.get($spacing, 'md');
 }
 
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: map-get($spacing, 'md');
-  flex: 1;
-  transition: transform 0.3s ease;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
+.carousel-track-container {
+    flex: 1;
+    overflow: hidden;
 }
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.project-slide {
+    min-width: 100%;
+    padding: 0 map.get($spacing, 'sm');
+}
+
+.carousel-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: map.get($radius, 'full');
+    border: 1px solid map.get($colors, 'border');
+    background: map.get($colors, 'bg-card');
+    cursor: pointer;
+    @include flex-center;
+    @include transition;
+    flex-shrink: 0;
+    
+    &:hover:not(:disabled) {
+        background: map.get($colors, 'accent-light');
+        border-color: map.get($colors, 'accent');
+    }
+    
+    &:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+    }
+    
+    .material-symbols-outlined {
+        font-size: 24px;
+        color: map.get($colors, 'text-secondary');
+    }
+}
+
+.carousel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: map.get($spacing, 'sm');
+    margin-top: map.get($spacing, 'lg');
+}
+
+.indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: map.get($radius, 'full');
+    background: map.get($colors, 'border');
+    cursor: pointer;
+    @include transition;
+    
+    &.active {
+        background: map.get($colors, 'accent');
+        transform: scale(1.2);
+    }
+    
+    &:hover:not(.active) {
+        background: map.get($colors, 'accent-light');
+    }
+}
+
+// ============================================
+// PROJECT CARD
+// ============================================
 
 .project-card {
-  background: map-get($colors, 'bg-card');
-  border-radius: map-get($radius, 'md');
-  padding: map-get($spacing, 'lg');
-  border: 1px solid map-get($colors, 'border');
-  @include transition;
-  @include hover-lift;
+    background: map.get($colors, 'bg-card');
+    border-radius: map.get($radius, 'lg');
+    border: 1px solid map.get($colors, 'border');
+    overflow: hidden;
+    @include transition;
+    max-width: 400px;
+    margin: 0 auto;
+    
+    &:hover {
+        box-shadow: $shadow-hover;
+        transform: translateY(-4px);
+    }
+}
 
-  &:hover {
-    border-color: map-get($colors, 'accent-light');
-  }
+.project-image-container {
+    position: relative;
+    height: 160px;
+    overflow: hidden;
 }
 
 .project-image {
-  width: 100%;
-  height: 120px;
-  background: linear-gradient(
-                  135deg,
-                  map-get($colors, 'bg-primary') 0%,
-                  map-get($colors, 'accent-light') 100%
-  );
-  border-radius: map-get($radius, 'sm');
-  margin-bottom: map-get($spacing, 'md');
-  border: 1px solid map-get($colors, 'border');
-  @include transition;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #e8dcc8 0%, #d4c4a8 100%);
+    transition: transform 0.3s ease;
+    
+    .project-card:hover & {
+        transform: scale(1.05);
+    }
+    
+    &.react-gradient {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+}
 
-  .project-card:hover & {
-    opacity: 0.8;
-  }
+.react-badge {
+    position: absolute;
+    top: map.get($spacing, 'sm');
+    right: map.get($spacing, 'sm');
+    background: #ffc107;
+    color: #333;
+    padding: 4px 10px;
+    border-radius: map.get($radius, 'full');
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.project-info {
+    padding: map.get($spacing, 'lg');
+}
+
+.project-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: map.get($colors, 'text-primary');
+    margin-bottom: map.get($spacing, 'xs');
+}
+
+.project-desc {
+    font-size: 0.9rem;
+    color: map.get($colors, 'text-muted');
+    margin-bottom: map.get($spacing, 'md');
 }
 
 .project-tags {
-  display: flex;
-  gap: map-get($spacing, 'xs');
-  margin: map-get($spacing, 'sm') 0;
-  flex-wrap: wrap;
-
-  span {
-    font-size: 0.7rem;
-    padding: 4px 8px;
-    background: map-get($colors, 'bg-primary');
-    border-radius: map-get($radius, 'full');
-    color: map-get($colors, 'text-muted');
-    border: 1px solid map-get($colors, 'border');
-  }
+    display: flex;
+    flex-wrap: wrap;
+    gap: map.get($spacing, 'xs');
+    margin-bottom: map.get($spacing, 'md');
 }
 
-.project-card a {
-  display: inline-block;
-  font-size: 0.85rem;
-  color: map-get($colors, 'text-secondary');
-  text-decoration: none;
-  @include transition;
-  margin-top: map-get($spacing, 'xs');
+.tag {
+    padding: 4px 10px;
+    background: map.get($colors, 'accent-light');
+    color: map.get($colors, 'accent-dark');
+    border-radius: map.get($radius, 'full');
+    font-size: 0.75rem;
+    font-weight: 500;
+    
+    &.react-tag {
+        background: #e8e0f0;
+        color: #5a4a8a;
+    }
+}
 
-  &:hover {
-    color: map-get($colors, 'text-primary');
-    transform: translateX(4px);
-  }
+.project-link {
+    color: map.get($colors, 'accent-dark');
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    @include transition;
+    
+    &:hover {
+        color: map.get($colors, 'accent');
+        margin-left: 4px;
+    }
 }
 
 // ============================================
-// ACTIVIDAD RECIENTE
+// ACTIVITY LIST
 // ============================================
-
-.activity {
-  margin-bottom: map-get($spacing, 'xl');
-}
 
 .activity-list {
-  list-style: none;
-  background: map-get($colors, 'bg-primary');
-  border-radius: map-get($radius, 'md');
-  padding: map-get($spacing, 'md');
-  border: 1px solid map-get($colors, 'border');
+    list-style: none;
+    background: map.get($colors, 'bg-secondary');
+    border-radius: map.get($radius, 'lg');
+    padding: map.get($spacing, 'lg');
+    border: 1px solid map.get($colors, 'border');
+}
 
-  li {
+.activity-item {
     display: flex;
-    gap: map-get($spacing, 'md');
-    padding: map-get($spacing, 'sm') 0;
     align-items: flex-start;
-
+    gap: map.get($spacing, 'md');
+    padding: map.get($spacing, 'md') 0;
+    
     &:not(:last-child) {
-      border-bottom: 1px solid map-get($colors, 'border');
+        border-bottom: 1px solid map.get($colors, 'border');
     }
-
-    span:first-child {
-      font-size: 18px;
-      color: map-get($colors, 'accent');
-      flex-shrink: 0;
+    
+    .material-symbols-outlined {
+        color: map.get($colors, 'accent');
+        flex-shrink: 0;
     }
-
+    
     div {
-      flex: 1;
-
-      strong {
-        display: block;
-        font-size: 0.9rem;
-        font-weight: 400;
-        color: map-get($colors, 'text-primary');
-        margin-bottom: 2px;
-      }
-
-      span {
-        font-size: 0.8rem;
-        color: map-get($colors, 'text-muted');
-      }
+        display: flex;
+        flex-direction: column;
+        
+        strong {
+            font-weight: 500;
+            color: map.get($colors, 'text-primary');
+            font-size: 0.95rem;
+        }
+        
+        span {
+            color: map.get($colors, 'text-muted');
+            font-size: 0.85rem;
+        }
     }
-  }
 }
 
 // ============================================
-// CONTACTO
+// SOCIAL LINKS
 // ============================================
-
-.contact {
-  text-align: center;
-}
 
 .social-links {
-  display: flex;
-  justify-content: center;
-  gap: map-get($spacing, 'xl');
-  margin-top: map-get($spacing, 'lg');
-  padding-top: map-get($spacing, 'lg');
-  border-top: 1px solid map-get($colors, 'border');
+    display: flex;
+    justify-content: center;
+    gap: map.get($spacing, 'lg');
+}
 
-  a {
-    color: map-get($colors, 'text-muted');
-    text-decoration: none;
-    @include transition;
+.social-btn {
+    width: 52px;
+    height: 52px;
+    border-radius: map.get($radius, 'full');
+    border: 2px solid map.get($colors, 'border');
+    background: map.get($colors, 'bg-card');
     @include flex-center;
-    width: 40px;
-    height: 40px;
-    border-radius: map-get($radius, 'circle');
-    background: map-get($colors, 'bg-primary');
-    border: 1px solid map-get($colors, 'border');
-
+    @include transition;
+    text-decoration: none;
+    
+    .material-symbols-outlined {
+        font-size: 24px;
+        color: map.get($colors, 'text-secondary');
+    }
+    
     &:hover {
-      background: map-get($colors, 'border');
-      color: map-get($colors, 'text-secondary');
-      transform: translateY(-2px);
+        border-color: map.get($colors, 'accent');
+        background: map.get($colors, 'accent-light');
+        transform: translateY(-3px);
+        
+        .material-symbols-outlined {
+            color: map.get($colors, 'accent-dark');
+        }
     }
-
-    span {
-      font-size: 20px;
-    }
-  }
 }
 
 // ============================================
-// ANIMACIONES
+// FOOTER
+// ============================================
+
+.footer {
+    text-align: center;
+    padding: map.get($spacing, 'lg');
+    color: map.get($colors, 'text-muted');
+    font-size: 0.85rem;
+}
+
+// ============================================
+// ANIMATIONS
 // ============================================
 
 @keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0.3;
-  }
-  50% {
-    transform: scale(1.2);
-    opacity: 0.1;
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
 }
 
 // ============================================
-// UTILITIES
+// MEDIA QUERIES
 // ============================================
 
-.material-symbols-outlined {
-  font-variation-settings:
-          'FILL' 0,
-          'wght' 300,
-          'GRAD' 0,
-          'opsz' 20;
+// Tablet
+@media (min-width: 768px) {
+    .name-title {
+        font-size: 3rem;
+    }
+    
+    .project-image-container {
+        height: 180px;
+    }
 }
+
+// Desktop
+@media (min-width: 992px) {
+    body {
+        font-size: 16px;
+    }
+    
+    .main-content {
+        padding-top: 100px;
+    }
+    
+    .name-title {
+        font-size: 3.5rem;
+    }
+    
+    .section-title {
+        font-size: 1rem;
+    }
+    
+    .project-image-container {
+        height: 200px;
+    }
+    
+    .project-info {
+        padding: map.get($spacing, 'xl');
+    }
+}
+
+// Large Desktop
+@media (min-width: 1200px) {
+    .name-title {
+        font-size: 4rem;
+    }
+    
+    .profile-card {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+}
+
+// Print styles
+@media print {
+    .navbar, 
+    .theme-toggle, 
+    .carousel-btn, 
+    .footer {
+        display: none;
+    }
+    
+    .main-content {
+        padding-top: 0;
+    }
+}
+
+// ============================================
+// DARK THEME
+// ============================================
+
+body.dark-theme {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #1a1a2e 100%);
+    color: #e0e0e0;
+    
+    .navbar {
+        background: rgba(26, 26, 46, 0.95) !important;
+        
+        .navbar-brand, .nav-link {
+            color: #e0e0e0 !important;
+            
+            &:hover {
+                color: map.get($colors, 'accent') !important;
+            }
+        }
+        
+        .navbar-toggler {
+            filter: invert(1);
+        }
+    }
+    
+    .profile-card {
+        background: #2d2d44;
+        border-color: #3d3d5c;
+    }
+    
+    .card-header-custom {
+        background: linear-gradient(135deg, #2d2d44 0%, #252538 100%);
+        border-color: #3d3d5c;
+    }
+    
+    .name-title {
+        color: #ffffff;
+    }
+    
+    .role-text {
+        color: map.get($colors, 'accent');
+    }
+    
+    .section-title {
+        color: #a0a0a0;
+    }
+    
+    .about-text {
+        color: #b0b0b0;
+    }
+    
+    .aspirations-box {
+        background: linear-gradient(135deg, #2d2d44 0%, #252538 100%);
+        border-color: #3d3d5c;
+        
+        h3 {
+            color: #e0e0e0;
+        }
+        
+        p {
+            color: #a0a0a0;
+        }
+    }
+    
+    .skill-badge {
+        background: #2d2d44;
+        border-color: #3d3d5c;
+        color: #b0b0b0;
+        
+        &:hover {
+            background: map.get($colors, 'accent-dark');
+            border-color: map.get($colors, 'accent');
+            color: #ffffff;
+        }
+    }
+    
+    .project-card {
+        background: #2d2d44;
+        border-color: #3d3d5c;
+    }
+    
+    .project-title {
+        color: #ffffff;
+    }
+    
+    .project-desc {
+        color: #a0a0a0;
+    }
+    
+    .tag {
+        background: rgba(201, 168, 124, 0.2);
+        color: map.get($colors, 'accent');
+        
+        &.react-tag {
+            background: rgba(102, 126, 234, 0.2);
+            color: #a0a0e0;
+        }
+    }
+    
+    .project-link {
+        color: map.get($colors, 'accent');
+        
+        &:hover {
+            color: map.get($colors, 'accent-light');
+        }
+    }
+    
+    .activity-list {
+        background: #2d2d44;
+        border-color: #3d3d5c;
+    }
+    
+    .activity-item {
+        border-color: #3d3d5c;
+        
+        strong {
+            color: #e0e0e0;
+        }
+        
+        span {
+            color: #a0a0a0;
+        }
+    }
+    
+    .theme-toggle {
+        background: #2d2d44;
+        border-color: #3d3d5c;
+        
+        .material-symbols-outlined {
+            color: #e0e0e0;
+        }
+        
+        &:hover {
+            background: map.get($colors, 'accent-dark');
+            border-color: map.get($colors, 'accent');
+        }
+    }
+    
+    .carousel-btn {
+        background: #2d2d44;
+        border-color: #3d3d5c;
+        
+        .material-symbols-outlined {
+            color: #b0b0b0;
+        }
+        
+        &:hover:not(:disabled) {
+            background: map.get($colors, 'accent-dark');
+            border-color: map.get($colors, 'accent');
+        }
+    }
+    
+    .indicator {
+        background: #3d3d5c;
+        
+        &.active {
+            background: map.get($colors, 'accent');
+        }
+        
+        &:hover:not(.active) {
+            background: #4d4d6c;
+        }
+    }
+    
+    .social-btn {
+        background: #2d2d44;
+        border-color: #3d3d5c;
+        
+        .material-symbols-outlined {
+            color: #b0b0b0;
+        }
+        
+        &:hover {
+            border-color: map.get($colors, 'accent');
+            background: map.get($colors, 'accent-dark');
+            
+            .material-symbols-outlined {
+                color: #ffffff;
+            }
+        }
+    }
+    
+    .footer {
+        color: #707070;
+    }
+    
+    .availability-indicator {
+        color: #a0a0a0;
+    }
+    
+    .availability-dot {
+        background: #7cb87c;
+        
+        &::after {
+            background: rgba(124, 184, 124, 0.2);
+        }
+    }
+    
+    .react-badge {
+        background: #ffc107;
+        color: #333;
+    }
+}
+
