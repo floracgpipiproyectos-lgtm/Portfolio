@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import type { SubmitEvent, ChangeEvent, KeyboardEvent } from 'react'
 import { Routes, Route, Navigate, Link, useNavigate, useLocation } from 'react-router-dom'
 import './App.css'
 
@@ -63,7 +64,7 @@ function LoginPage({ onLogin }: { onLogin: (user: User) => void }) {
   const [name, setName] = useState('')
   const navigate = useNavigate()
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: SubmitEvent) => {
     e.preventDefault()
     if (isRegister) {
       const newUser: User = {
@@ -148,7 +149,7 @@ function Layout({ children, user, onLogout }: { children: React.ReactNode; user:
       )
     : []
 
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value)
     setShowSearchResults(e.target.value.length > 0)
   }
@@ -159,7 +160,7 @@ function Layout({ children, user, onLogout }: { children: React.ReactNode; user:
     setShowSearchResults(false)
   }
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key === 'Escape') {
       setSearchQuery('')
       setShowSearchResults(false)
@@ -230,7 +231,6 @@ function Layout({ children, user, onLogout }: { children: React.ReactNode; user:
           <button className="theme-toggle" onClick={() => setDarkMode(!darkMode)} aria-label="Cambiar tema">
             {darkMode ? '☀️' : '🌙'}
           </button>
-          <Link to="../../index.html" className="back-btn">🏠 Volver al Portfolio</Link>
         </header>
         <div className="layout-content">{children}</div>
       </main>
